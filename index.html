@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>MockServer - Client</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="adminlte/css/bootstrap.min.css">
+<link rel="stylesheet" href="adminlte/css/font-awesome.min.css">
+<link rel="stylesheet" href="adminlte/css/ionicons.min.css">
+<link rel="stylesheet" href="css/select2.min.css">
+<link rel="stylesheet" href="adminlte/css/AdminLTE.min.css">
+<link rel="stylesheet" href="adminlte/css/_all-skins.min.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/jsoneditor.min.css">
+</head>
+
+<body class="hold-transition skin-blue-light layout-top-nav">
+
+  <div id="alerts"></div>
+
+  <div id="pageTop"><a href="#">Top</a></div>
+
+  <div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+
+      <!-- Header Navbar -->
+      <nav class="navbar navbar-static-top" role="navigation">
+         <div class="container-fluid">
+            <div class="navbar-header">
+              <div class="navbar-brand"><b>MockServer</b>Client</div>
+            </div>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" id="navbar-host-input" placeholder="Host" value="127.0.0.1">
+                <input type="text" class="form-control" id="navbar-port-input" placeholder="Port" value="1080">
+              </div>
+            </form>
+            
+	        <!-- Navbar Right Menu -->
+	        <div class="navbar-custom-menu">
+	          <ul class="nav navbar-nav">
+
+	            <!-- <li><a href="#" onclick="toggleMenu('expectations');" ><i class="fa fa-home"></i></a></li> -->
+	            <!-- Control Sidebar Toggle Button -->
+	            <li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
+
+	          </ul>
+	        </div>
+         </div>
+      </nav>
+    </header>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+
+      <!-- Main content -->
+      <section class="content container-fluid" id="accordion">
+
+        <div class="panel">
+          <section id="expectations" class="collapse in">
+            <h2 class="page-header">
+              <span id="expectations_title">Expectations List
+              <input type="button" value="Refresh Active" onclick="listActiveExpectations();" class="btn btn-info">
+              <!-- <input type="button" value="Show Recorded" onclick="listRecordedExpectations();" class="btn btn-info"> -->
+              <input type="button" value="Filter" onclick="filterExpectations();" class="btn btn-info">
+              <input type="button" value="Reset Expectations" onclick="resetExpectations();" class="btn btn-danger">
+              </span>
+            </h2>
+
+            <div class="box box-solid"><div class="top-round-rainbow"></div>
+              <div class="box-body">
+                <table class="table table-striped bring-up nth-2-center">
+                  <thead>
+                    <tr>
+                      <th>Index(adding order)</th>
+                      <th>Request</th>
+                      <th>Response</th>
+                      <th>Times</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ex">
+                  </tbody>
+                </table>
+              </div><!-- /.box-body -->
+            </div>
+            
+          </section>
+        </div>
+
+        <div class="panel">
+          <section id="add" class="collapse in">
+            <h2 class="">
+              <span id="expectations_title">Add Expectations
+              <input type="button" value="Add" onclick="addExpectations();" class="btn btn-info">
+              </span>
+            </h2>
+
+
+              <form class="form-horizontal col-xs-22">
+
+                <div class="box box-warning"><div class="top-round-rainbow"></div>
+                  <div class="box-header with-border">
+                    <h3 class="box-title">Request</h3>
+
+                  </div>
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="i1" class="col-xs-2 control-label">Method</label>
+                      <div class="col-xs-2">
+                        <select class="form-control select2" id="i1" onchange="">
+                          <option value="">Any</option>
+                          <option value="GET">GET</option>
+                          <option value="POST">POST</option>
+                          <option value="PUT">PUT</option>
+                          <option value="HEAD">HEAD</option>
+                          <option value="DELETE">DELETE</option>
+                          <option value="CONNECT">CONNECT</option>
+                          <option value="OPTIONS">OPTIONS</option>
+                          <option value="TRACE">TRACE</option>
+                          <option value="PATCH">PATCH</option>
+                        </select>
+                      </div>
+
+                      <label for="i2" class="col-xs-2 control-label">Path</label>
+                      <div class="col-xs-2">
+                        <input type="text" class="form-control" id="i2" placeholder="path">
+                      </div>
+
+
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+
+                <div class="box box-danger"><div class="top-round-rainbow"></div>
+                  <div class="box-header with-border">
+                    <h3 class="box-title">Response</h3>
+                  </div>
+                  <div class="box-body">
+
+                    <div class="form-group">
+                    
+                      <label for="o1" class="col-xs-2 control-label">Response Type</label>
+                      <div class="col-xs-2">
+                        <select class="form-control select2" id="o1" onchange="">
+                          <option value="response">Response</option>
+                          <option value="forward">Forward</option>
+                          <option value="callback">Callback</option>
+                          <option value="error">Error</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+
+                      <label for="o2" class="col-xs-2 control-label">Status Code</label>
+                      <div class="col-xs-2">
+                        <input type="text" class="form-control" id="o2" placeholder="Status" value="200">
+                      </div>
+
+                      <label for="o5" class="col-xs-2 control-label">Reason Phrase</label>
+                      <div class="col-xs-2">
+                        <input type="text" class="form-control" id="o5" placeholder="Reason Phrase" value="">
+                      </div>
+
+                      <label for="o3" class="col-xs-2 control-label">Delay</label>
+                      <div class="col-xs-2">
+                        <input type="text" class="form-control" id="o3" placeholder="Delay">
+                      </div>
+
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                    
+                      <label for="o4" class="col-xs-2 control-label">Body Type</label>
+                      <div class="col-xs-2">
+                        <select class="form-control select2" id="o4" onchange="">
+                          <option value="">Normal</option>
+                          <option value="UTF16">UTF16/BINARY</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+
+                      <label for="o6" class="col-xs-2 control-label">Body</label>
+                      <div class="col-xs-10">
+                        <textarea class="form-control" id="o6" rows="4" placeholder="">[{"name":"James","age":20},{"name":"Tom","age":16}]</textarea>
+                      </div>
+
+
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+                
+                
+                <div class="box box-info"><div class="top-round-rainbow"></div>
+                  <div class="box-header with-border">
+                    <h3 class="box-title">Time</h3>
+                  </div>
+                  <div class="box-body">
+
+                    <div class="form-group">
+
+                      <label for="t1" class="col-xs-2 control-label">Times</label>
+                      <div class="col-xs-2">
+                        <input type="text" class="form-control" id="t1" placeholder="how many times the action should be taken">
+                      </div>
+
+                      <label for="t2" class="col-xs-2 control-label">Time to live</label>
+                      <div class="col-xs-2">
+                        <input type="text" class="form-control" id="t2" placeholder="how long the expectation should stay active">
+                      </div>
+
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+
+
+              </form>
+              
+          </section>
+        </div>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+      <!-- To the right -->
+      <div class="pull-right hidden-xs">
+        <strong>Version:</strong>&nbsp;1.6.7&nbsp;&nbsp;&nbsp;<strong>Modify:</strong> 2018/06/07 <strong>Editor:</strong> wenzhoou
+      </div>
+      <!-- Default to the left -->
+      <strong>&nbsp;<a href="#"></a></strong>
+    </footer>
+
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-light">
+
+      <!-- Tab panes -->
+      <div class="tab-content" id="my-tabs-content"></div>
+    </aside>
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+  immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+  </div>
+  <!-- ./wrapper -->
+
+  <script src="adminlte/js/jquery-3.3.1.min.js"></script>
+  <script src="adminlte/js/bootstrap.min.js"></script>
+  <script src="adminlte/js/adminlte.min.js"></script>
+  <script src="adminlte/js/demo.js"></script>
+  <script src="js/layer.js"></script>
+  <!-- <script src="js/jsrsasign-all-min.js"></script>
+  <script src="js/jsoneditor.min.js"></script>
+  <script src="js/select2.full.min.js"></script> -->
+  <script src="js/mockServerClient.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
