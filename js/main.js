@@ -8,6 +8,8 @@ $(function() {
     $('#navbar-port-input').on('blur', changeServer);
     changeServer();
     listActiveExpectations();
+    $("#o3e a").on("click", function(){$("#o3b").text($(this).text())});
+    $("#t2e a").on("click", function(){$("#t2b").text($(this).text())});
 });
 
 function changeServer() {
@@ -114,7 +116,7 @@ function addExpectations() {
         exp.httpResponse.statusCode= Number($("#o2").val());
         if (!$("#o4").val()) {exp.httpResponse.body = ($("#o6").val());}
         if ($("#o5").val()) {exp.httpResponse.reasonPhrase = ($("#o5").val());}
-        if ($("#o3").val()) {exp.httpResponse.delay = { "timeUnit": "SECONDS", "value" : Number($("#o3").val())};}
+        if ($("#o3").val()) {exp.httpResponse.delay = { "timeUnit": $("#o3b").text().toUpperCase(), "value" : Number($("#o3").val())};}
     } else {
         alert("Currently only response supported");
         return;
@@ -128,7 +130,7 @@ function addExpectations() {
     }
     if ($("#t2").val()) { 
         exp.timeToLive = {};
-        exp.timeToLive.timeUnit = "SECONDS";
+        exp.timeToLive.timeUnit = $("#t2b").text().toUpperCase();
         exp.timeToLive.timeToLive = Number($("#t2").val());
     } else {
         exp.timeToLive = {};

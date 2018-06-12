@@ -102,7 +102,7 @@
             </h2>
 
 
-              <form class="form-horizontal col-xs-22">
+              <form class="form-horizontal">
 
                 <div class="box box-warning"><div class="top-round-rainbow"></div>
                   <div class="box-header with-border">
@@ -111,8 +111,8 @@
                   </div>
                   <div class="box-body">
                     <div class="form-group">
-                      <label for="i1" class="col-xs-2 control-label">Method</label>
-                      <div class="col-xs-2">
+                      <label for="i1" class="col-md-2 control-label">Method</label>
+                      <div class="col-md-2">
                         <select class="form-control select2" id="i1" onchange="">
                           <option value="">Any</option>
                           <option value="GET">GET</option>
@@ -127,8 +127,8 @@
                         </select>
                       </div>
 
-                      <label for="i2" class="col-xs-2 control-label">Path</label>
-                      <div class="col-xs-2">
+                      <label for="i2" class="col-md-2 control-label">Path</label>
+                      <div class="col-md-2">
                         <input type="text" class="form-control" id="i2" placeholder="path">
                       </div>
 
@@ -147,8 +147,8 @@
 
                     <div class="form-group">
                     
-                      <label for="o1" class="col-xs-2 control-label">Response Type</label>
-                      <div class="col-xs-2">
+                      <label for="o1" class="col-md-2 control-label">Response Type</label>
+                      <div class="col-md-2">
                         <select class="form-control select2" id="o1" onchange="">
                           <option value="response">Response</option>
                           <option value="forward">Forward</option>
@@ -160,27 +160,41 @@
                     <!-- /.form-group -->
                     <div class="form-group">
 
-                      <label for="o2" class="col-xs-2 control-label">Status Code</label>
-                      <div class="col-xs-2">
+                      <label for="o2" class="col-md-2 control-label">Status Code</label>
+                      <div class="col-md-2">
                         <input type="text" class="form-control" id="o2" placeholder="Status" value="200">
                       </div>
 
-                      <label for="o5" class="col-xs-2 control-label">Reason Phrase</label>
-                      <div class="col-xs-2">
+                      <label for="o5" class="col-md-2 control-label">Reason Phrase</label>
+                      <div class="col-md-2">
                         <input type="text" class="form-control" id="o5" placeholder="Reason Phrase" value="">
                       </div>
 
-                      <label for="o3" class="col-xs-2 control-label">Delay</label>
-                      <div class="col-xs-2">
-                        <input type="text" class="form-control" id="o3" placeholder="Delay">
+                      <label for="o3" class="col-md-2 control-label">Delay</label>
+                      <div class="col-md-2">
+                          <div class="input-group">
+                            <input type="text" id="o3" class="form-control" placeholder="Delay">
+                            <div class="input-group-btn">
+                              <ul class="dropdown-menu" id="o3e">
+                                <li><a href="#">minutes</a></li>
+                                <li><a href="#">seconds</a></li>
+                                <li><a href="#">milliseconds</a></li>
+                              </ul>
+                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><span id="o3b">milliseconds</span>
+                                <span class="fa fa-caret-down"></span></button>
+                            </div>
+                            <!-- /btn-group -->
+                          </div><!-- /input-group -->
+                      
+                      
                       </div>
 
                     </div>
                     <!-- /.form-group -->
                     <div class="form-group">
                     
-                      <label for="o4" class="col-xs-2 control-label">Body Type</label>
-                      <div class="col-xs-2">
+                      <label for="o4" class="col-md-2 control-label">Body Type</label>
+                      <div class="col-md-2">
                         <select class="form-control select2" id="o4" onchange="">
                           <option value="">Normal</option>
                           <option value="UTF16">UTF16/BINARY</option>
@@ -191,8 +205,8 @@
                     <!-- /.form-group -->
                     <div class="form-group">
 
-                      <label for="o6" class="col-xs-2 control-label">Body</label>
-                      <div class="col-xs-10">
+                      <label for="o6" class="col-md-2 control-label">Body</label>
+                      <div class="col-md-10">
                         <textarea class="form-control" id="o6" rows="4" placeholder="">[{"name":"James","age":20},{"name":"Tom","age":16}]</textarea>
                       </div>
 
@@ -212,14 +226,28 @@
 
                     <div class="form-group">
 
-                      <label for="t1" class="col-xs-2 control-label">Times</label>
-                      <div class="col-xs-2">
+                      <label for="t1" class="col-md-2 control-label">Times</label>
+                      <div class="col-md-2">
                         <input type="text" class="form-control" id="t1" placeholder="how many times the action should be taken">
                       </div>
 
-                      <label for="t2" class="col-xs-2 control-label">Time to live</label>
-                      <div class="col-xs-2">
-                        <input type="text" class="form-control" id="t2" placeholder="how long the expectation should stay active">
+                      <label for="t2" class="col-md-2 control-label">Time to live</label>
+                      <div class="col-md-2">
+                          <div class="input-group">
+                          
+                            <input type="text" id="t2" class="form-control" placeholder="how long the expectation should stay active">
+                            <div class="input-group-btn">
+                              <ul class="dropdown-menu" id="t2e">
+                                <li><a href="#">hours</a></li>
+                                <li><a href="#">minutes</a></li>
+                                <li><a href="#">seconds</a></li>
+                                <li><a href="#">milliseconds</a></li>
+                              </ul>
+                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><span id="t2b">minutes</span>
+                                <span class="fa fa-caret-down"></span></button>
+                            </div>
+                            <!-- /btn-group -->
+                          </div><!-- /input-group -->
                       </div>
 
                     </div>
